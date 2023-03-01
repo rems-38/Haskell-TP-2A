@@ -15,3 +15,15 @@ comparer (Atout _) (Standard _ _) = True
 comparer (Standard _ _) (Atout _) = False
 comparer Excuse _ = False
 comparer _ Excuse = True
+
+meme_couleur :: Couleur -> Carte -> Bool
+meme_couleur c (Standard c2 _) = c == c2
+meme_couleur _ _ = False
+
+atout_plus_grand :: Int -> Carte -> Bool
+atout_plus_grand x (Atout y) = y >= x
+atout_plus_grand _ _ = False
+
+atout :: Carte -> Bool
+atout (Atout _) = True
+atout _ = False

@@ -1,3 +1,4 @@
+print "Comparer"
 comparer (Standard Carreau 6) (Standard Trèfle 6)
 -- => False
 comparer (Standard Carreau 6) (Standard Carreau 9)
@@ -21,3 +22,30 @@ comparer (Standard Pique 9) Excuse
 comparer (Atout 9) Excuse
 -- => True
 
+print "Meme couleur"
+meme_couleur Carreau (Standard Trèfle 6)
+-- => False
+meme_couleur Carreau (Standard Carreau 9)
+-- => True
+meme_couleur Pique (Atout 12)
+-- => False
+meme_couleur Trèfle Excuse
+-- => False
+
+print "Atout plus grand"
+atout_plus_grand 6 (Atout 4)
+-- => False
+atout_plus_grand 6 (Atout 14)
+-- => True
+atout_plus_grand 5 (Standard Trèfle 6)
+-- => False
+atout_plus_grand 18 Excuse
+-- => False
+
+print "Atout"
+atout (Atout 4)
+-- => True
+atout (Standard Trèfle 6)
+-- => False
+atout Excuse
+-- => False
