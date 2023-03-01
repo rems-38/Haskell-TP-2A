@@ -43,4 +43,12 @@ cartes_possibles_hors_excuse :: Carte -> [Carte] -> [Carte]
 cartes_possibles_hors_excuse (Standard c _) cartes = (filter (meme_couleur c) cartes ||| filter atout cartes) ||| cartes
 cartes_possibles_hors_excuse (Atout x) cartes = (filter (atout_plus_grand x) cartes ||| filter atout cartes) ||| cartes
 
---cartes_possibles :: Carte -> [Carte] -> [Carte]
+
+is_excuse :: Carte -> Bool
+is_excuse Excuse = True
+is_excuse _ = False
+
+cartes_possibles :: Carte -> [Carte] -> [Carte]
+cartes_possibles carte@(Standard _ _) cartes = (filter is_excuse cartes) ++ (cartes_possibles_hors_excuse carte cartes)
+cartes_possibles carte@(Atout _) cartes = (filter is_excuse cartes) ++ (cartes_possibles_hors_excuse carte cartes)
+cartes_possibles Excuse cartes = cartes
