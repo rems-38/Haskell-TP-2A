@@ -8,3 +8,9 @@ repeter_n_fois 4 (True, False)
 
 etoiles 3 "coucou"
 -- "***coucou***"
+
+slashes "coucou"
+-- "/coucou/"
+
+commentaire_documentation "coucou"
+-- "/** coucou **/"

@@ -8,4 +8,10 @@ etoiles :: Int -> String -> String
 etoiles n s = repeter_n_fois n '*' ++ s ++ repeter_n_fois n '*'
 
 slashes :: String -> String
--- slashes s = '/' ++ s ++ '/'
+slashes s = '/' : s ++ "/"
+
+espace :: String -> String
+espace s = ' ' : s ++ [' ']
+
+commentaire_documentation :: String -> String
+commentaire_documentation = slashes . (etoiles 2) . espace
