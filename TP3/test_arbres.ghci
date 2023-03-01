@@ -1,0 +1,15 @@
+-- a représente un type
+
+nombre_feuilles arbre_exemple
+-- => 5
+
+hauteur arbre_exemple
+-- => 4
+
+rechercher_abr abr_exemple 0
+-- => True
+rechercher_abr abr_exemple 1
+-- => False
+
+aplatir_abr abr_exemple
+-- => [-8,-5,0,4,13,18,28,42,73]

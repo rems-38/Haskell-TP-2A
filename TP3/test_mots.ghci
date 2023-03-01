@@ -1,0 +1,7 @@
+espace 'c'
+-- => False
+espace ' '
+-- => True
+
+separe (== 'a') "aaabaaba"
+-- => ("aaa","baaba")

@@ -1,0 +1,27 @@
+somme_liste [1..100]
+-- => 5050
+
+acc_ints (+) 0 [1, 2, 3, 4]
+-- => 10
+acc_ints (*) 1 [1, 2, 3, 4]
+-- => 24
+acc_ints (-) 0 [1, 2, 3, 4]
+-- => -2
+-- donc ça effectue l'op suivante 4 - 3 - 2 - 1 (- 0)
+
+max_liste [1, 2, 3, 4]
+-- => 4
+max_liste [1, 4, 6, 2]
+-- => 6
+
+acc (++) "" ["bo", "nj", "ou", "r!"]
+-- => "bonjour!"
+-- le type de acc (selon GHCi) est : acc :: (t1 -> t2 -> t2) -> t2 -> [t1] -> t2
+
+my_foldl (-) 0 [2, 3]
+-- => -5
+my_foldr (-) 0 [2, 3]
+-- => -1
+
+join ["Ceci", "est", "un", "test"]
+-- => "Ceci est un test "
