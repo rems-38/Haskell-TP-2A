@@ -1,0 +1,10 @@
+repeter_n_fois1 5 'd'
+-- => "ddddd"
+
+repeter_n_fois 3 5.9
+-- => [5.9,5.9,5.9]
+repeter_n_fois 4 (True, False)
+-- => [(True,False),(True,False),(True,False),(True,False)]
+
+etoiles 3 "coucou"
+-- "***coucou***"

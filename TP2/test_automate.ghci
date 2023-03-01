@@ -1,0 +1,24 @@
+print "First manual test for all functions"
+
+init_state = (0, Vide)
+
+running_state = lancerMachine init_state
+ready_state = attendre running_state
+done_state = servirCafe ready_state
+done_state2 = servirCafe done_state
+done_state3 = servirCafe done_state2
+done_state4 = servirCafe done_state3
+
+print init_state
+print running_state
+print ready_state
+print done_state
+print done_state2
+print done_state3
+print done_state4
+
+print "Test for the list of actions"
+
+automatic_cafe = executerActions init_state "LASSASSLSSASSSLSASSAASSLSAS"
+print automatic_cafe -- 12 cafés sont fait à la fin
+
