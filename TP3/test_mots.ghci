@@ -5,3 +5,12 @@ espace ' '
 
 separe (== 'a') "aaabaaba"
 -- => ("aaa","baaba")
+
+grignote_espaces "      salut"
+-- => "salut"
+
+un_mot "  salut comment ca va"
+-- => ("salut"," comment ca va")
+
+mots "  salut comment ca va"
+-- => ["salut","comment","ca","va"]
