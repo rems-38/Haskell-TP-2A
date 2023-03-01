@@ -1,0 +1,23 @@
+comparer (Standard Carreau 6) (Standard Trèfle 6)
+-- => False
+comparer (Standard Carreau 6) (Standard Carreau 9)
+-- => False
+comparer (Standard Carreau 6) (Standard Carreau 4)
+-- => True
+comparer (Atout 2) (Standard Carreau 4)
+-- => True
+comparer (Standard Coeur 12) (Atout 6)
+-- => False
+comparer (Atout 8) (Atout 21)
+-- => False
+comparer (Atout 16) (Atout 3)
+-- => True
+comparer Excuse (Standard Trèfle 12)
+-- => False
+comparer Excuse (Atout 1)
+-- => False
+comparer (Standard Pique 9) Excuse
+-- => True
+comparer (Atout 9) Excuse
+-- => True
+
