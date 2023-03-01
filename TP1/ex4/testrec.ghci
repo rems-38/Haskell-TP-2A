@@ -1,0 +1,17 @@
+puissance 4 8
+puissance 2 4
+puissance 2 1
+puissance 2 0
+
+fact 4
+fact 1
+fact 0
+
+somme_carres 3
+somme_carres 1
+somme_carres 0
+
+fibonacci 0
+fibonacci 1 
+fibonacci 2
+fibonacci 5
