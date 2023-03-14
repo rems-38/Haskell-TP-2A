@@ -1,0 +1,22 @@
+parcours_infixe arbre_exemple
+-- => [-5,18,42,-8,4,28,0,13,73]
+
+foldr_arbre (+) 0 arbre_exemple
+-- => 165
+foldr (+) 0 (parcours_infixe arbre_exemple)
+-- => 165
+
+foldr_arbre (-) 0 arbre_exemple
+-- => 63
+foldr (-) 0 (parcours_infixe arbre_exemple)
+-- => 63
+
+-- foldr :: Foldable t => (a -> b -> b) -> b -> t a -> b
+-- On a pris comme "valeurs" pour t des listes et des "Bintree" 
+
+to_list arbre_exemple
+-- => [-5,18,42,-8,4,28,0,13,73]
+
+-- sum :: (Foldable t, Num a) => t a -> a
+sum arbre_exemple
+-- => 165
