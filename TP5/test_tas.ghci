@@ -1,0 +1,20 @@
+taille t1
+-- => 8
+taille (Noeud 4 (15) (Noeud 2 28 Vide (Noeud 1 60 Vide Vide)) (Noeud 1 7 Vide Vide))
+-- => 4
+taille Vide
+-- => 0
+
+tas_min t1
+-- => -8
+tas_min (Noeud 4 (15) (Noeud 2 28 Vide (Noeud 1 60 Vide Vide)) (Noeud 1 7 Vide Vide))
+-- => 7
+
+noeud 1 (Noeud 1 5 Vide Vide) (Noeud 1 42 Vide Vide)
+-- => Noeud 3 5 (Noeud 1 5 Vide Vide) (Noeud 1 42 Vide Vide)
+
+est_equilibre t1
+-- => True
+est_equilibre (Noeud 5 (-8) (Noeud 3 1 (Noeud 1 5 Vide Vide) (Noeud 1 42 Vide Vide)) (Noeud 1 (-3) Vide Vide))
+-- => False
+
