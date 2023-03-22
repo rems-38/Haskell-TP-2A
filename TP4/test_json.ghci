@@ -1,0 +1,6 @@
+show_json exemple_tableau
+-- => "[42, True, \"JSON!\", [False, 0]]"
+show_json exemple_objet
+-- => "{\"entier\": 42, \"texte\": \"Haskell!\", \"tableau\": [True]}"
+show exemple_objet
+-- => "{\"entier\": 42, \"texte\": \"Haskell!\", \"tableau\": [True]}"
