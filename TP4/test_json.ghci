@@ -14,3 +14,16 @@ deserialize_task (JSON_Object [("op", JSON_String "PrintVal"), ("x", JSON_Int 42
 -- => Just (PrintVal 42)
 deserialize_task (JSON_Object [("op", JSON_String "PrintVal"), ("x", JSON_Int 42), ("y", JSON_Int 17)])
 -- => Just (PrintSum 42 17)
+
+-- (vérif de l'instance)
+serialize (PrintSum 8 6)
+-- => {"op": "PrintSum", "x": 8, "y": 6}
+
+serialize [1, 2, 3] == JSON_Array [JSON_Int 1, JSON_Int 2, JSON_Int 3]
+serialize [True, False] == JSON_Array [JSON_Bool True, JSON_Bool False]
+serialize ["hello", "world"] == JSON_Array [JSON_String "hello", JSON_String "world"]
+
+deserialize (JSON_Array [JSON_Int 1, JSON_Int 2, JSON_Int 3]) == Just [1, 2, 3]
+deserialize (JSON_Array [JSON_Bool True, JSON_Bool False]) == Just [True, False]
+deserialize (JSON_Array [JSON_String "hello", JSON_String "world"]) == Just ["hello", "world"]
+

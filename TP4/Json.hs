@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleInstances #-} -- pour que l'instance Serializable String fonctionne
 import Data.List (intercalate)
 
 data JSON =
@@ -38,10 +39,48 @@ serialize_task (PrintVal x) = JSON_Object [("op", JSON_String "PrintVal"), ("x",
 serialize_task (PrintSum x y) = JSON_Object [("op", JSON_String "PrintSum"), ("x", JSON_Int x), ("y", JSON_Int y)]
 
 deserialize_task :: JSON -> Maybe Task
-deserialize_task (JSON_Object obj) | (tail $ tail obj) == [] = Just $ PrintVal (jsonToInt (snd (head $ tail obj)))
-                                   | otherwise = Just $ PrintSum (jsonToInt (snd (head $ tail obj))) (jsonToInt (snd (head $ tail $ tail obj)))
+deserialize_task (JSON_Object obj) | (tail $ tail obj) == [] = Just $ PrintVal x
+                                   | otherwise = Just $ PrintSum x y
+    where x = jsonToInt (snd (head $ tail obj))
+          y = jsonToInt (snd (head $ tail $ tail obj))
 deserialize_task _ = Nothing
 
 jsonToInt :: JSON -> Integer
 jsonToInt (JSON_Int x) = x
 
+class Serializable a where
+    serialize :: a -> JSON
+    deserialize :: JSON -> Maybe a
+
+instance Serializable Task where
+    serialize = serialize_task
+    deserialize = deserialize_task
+
+instance (Serializable a) => Serializable [a] where
+    serialize = serialize_list
+    deserialize = deserialize_list
+
+serialize_list :: Serializable a => [a] -> JSON
+serialize_list xs = JSON_Array $ map serialize xs
+
+deserialize_list :: Serializable a => JSON -> Maybe [a]
+deserialize_list (JSON_Array arr) = Just $ map unMaybe (map deserialize arr)
+deserialize_list _ = Nothing
+
+unMaybe :: Maybe a -> a 
+unMaybe (Just x) = x
+
+instance Serializable Integer where
+    serialize n = JSON_Int $ n
+    deserialize (JSON_Int n) = Just n
+    deserialize _ = Nothing
+
+instance Serializable Bool where
+    serialize b = JSON_Bool $ b
+    deserialize (JSON_Bool b) = Just b
+    deserialize _ = Nothing
+
+instance {-# OVERLAPPING #-} Serializable String where
+    serialize s = JSON_String $ s
+    deserialize (JSON_String s) = Just s
+    deserialize _ = Nothing
