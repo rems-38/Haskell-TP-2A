@@ -5,7 +5,7 @@ data JSON =
     JSON_Bool Bool |
     JSON_String String |
     JSON_Array [JSON] |
-    JSON_Object [(String, JSON)]
+    JSON_Object [(String, JSON)] deriving Eq
 
 exemple_tableau :: JSON
 exemple_tableau = JSON_Array [JSON_Int 42, JSON_Bool True, JSON_String "JSON!", JSON_Array [JSON_Bool False, JSON_Int 0]]
@@ -30,3 +30,18 @@ instance Show JSON where
 -- Bonus/personal function to get "hello" and not "\"hello\""
 print_json :: JSON -> IO()
 print_json json = putStrLn (show_json json)
+
+data Task = PrintVal Integer | PrintSum Integer Integer deriving Show
+
+serialize_task :: Task -> JSON
+serialize_task (PrintVal x) = JSON_Object [("op", JSON_String "PrintVal"), ("x", JSON_Int x)]
+serialize_task (PrintSum x y) = JSON_Object [("op", JSON_String "PrintSum"), ("x", JSON_Int x), ("y", JSON_Int y)]
+
+deserialize_task :: JSON -> Maybe Task
+deserialize_task (JSON_Object obj) | (tail $ tail obj) == [] = Just $ PrintVal (jsonToInt (snd (head $ tail obj)))
+                                   | otherwise = Just $ PrintSum (jsonToInt (snd (head $ tail obj))) (jsonToInt (snd (head $ tail $ tail obj)))
+deserialize_task _ = Nothing
+
+jsonToInt :: JSON -> Integer
+jsonToInt (JSON_Int x) = x
+

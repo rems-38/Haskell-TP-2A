@@ -4,3 +4,13 @@ show_json exemple_objet
 -- => "{\"entier\": 42, \"texte\": \"Haskell!\", \"tableau\": [True]}"
 show exemple_objet
 -- => "{\"entier\": 42, \"texte\": \"Haskell!\", \"tableau\": [True]}"
+
+serialize_task (PrintVal 5)
+-- => {"op": "PrintVal", "x": 5}
+serialize_task (PrintSum 8 6)
+-- => {"op": "PrintSum", "x": 8, "y": 6}
+
+deserialize_task (JSON_Object [("op", JSON_String "PrintVal"), ("x", JSON_Int 42)])
+-- => Just (PrintVal 42)
+deserialize_task (JSON_Object [("op", JSON_String "PrintVal"), ("x", JSON_Int 42), ("y", JSON_Int 17)])
+-- => Just (PrintSum 42 17)
