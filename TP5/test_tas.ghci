@@ -18,3 +18,39 @@ est_equilibre t1
 est_equilibre (Noeud 5 (-8) (Noeud 3 1 (Noeud 1 5 Vide Vide) (Noeud 1 42 Vide Vide)) (Noeud 1 (-3) Vide Vide))
 -- => False
 
+ajouter 3 t1
+-- => Noeud 9 3 (Noeud 4 1 (Noeud 2 5 (Noeud 1 (-8) Vide Vide) Vide) (Noeud 1 42 Vide Vide)) (Noeud 4 (-3) (Noeud 2 28 Vide (Noeud 1 60 Vide Vide)) (Noeud 1 7 Vide Vide))
+est_equilibre (ajouter 3 t1)
+-- => True
+
+retirer_feuille t1
+-- => (60,Noeud 7 (-8) (Noeud 3 1 (Noeud 1 5 Vide Vide) (Noeud 1 42 Vide Vide)) (Noeud 3 (-3) (Noeud 1 28 Vide Vide) (Noeud 1 7 Vide Vide)))
+est_equilibre $ snd $ retirer_feuille t1
+-- => True
+
+t2 = Noeud 9 (-8) (Noeud 3 1 (Noeud 1 5 Vide Vide) (Noeud 1 42 Vide Vide)) (Noeud 5 (-3) (Noeud 3 28 Vide (Noeud 2 60 Vide (Noeud 1 61 Vide Vide))) (Noeud 1 7 Vide Vide))
+est_equilibre t2
+-- => False
+equilibrer t2
+-- => Noeud 9 (-8) (Noeud 4 1 (Noeud 2 5 (Noeud 1 61 Vide Vide) Vide) (Noeud 1 42 Vide Vide)) (Noeud 4 (-3) (Noeud 2 28 Vide (Noeud 1 60 Vide Vide)) (Noeud 1 7 Vide Vide))
+est_equilibre $ equilibrer t2
+-- => True
+
+retirer t1
+-- => Noeud 7 (-3) (Noeud 3 1 (Noeud 1 5 Vide Vide) (Noeud 1 42 Vide Vide)) (Noeud 3 7 (Noeud 1 28 Vide Vide) (Noeud 1 60 Vide Vide))
+est_equilibre $ retirer t1
+-- => True
+
+construit [1, 2, 3, 4, 5]
+-- => Noeud 5 1 (Noeud 2 2 (Noeud 1 3 Vide Vide) Vide) (Noeud 2 4 (Noeud 1 5 Vide Vide) Vide)
+est_equilibre $ construit [1, 2, 3, 4, 5]
+-- => True
+construit [-2, 3, 0, 1, -1, 2]
+-- => Noeud 6 (-2) (Noeud 3 3 (Noeud 1 0 Vide Vide) (Noeud 1 (-1) Vide Vide)) (Noeud 2 1 (Noeud 1 2 Vide Vide) Vide)
+est_equilibre $ construit [-2, 3, 0, 1, -1, 2]
+-- => True
+
+deconstruit t1
+-- => [-8,1,5,42,-3,28,60,7]
+(deconstruit . construit) [-2, 3, 0, 1, -1, 2]
+-- => [-2,3,0,-1,1,2]
