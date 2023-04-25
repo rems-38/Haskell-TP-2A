@@ -1,0 +1,68 @@
+pChiffre "4coucou"
+-- => Just ('4',"coucou")
+pChiffre "45coucou"
+-- => Just ('4',"5coucou")
+pChiffre "salut"
+-- => Nothing
+
+sauterEspaces "    coucou"
+-- => "coucou"
+sauterEspaces "coucou"
+-- => "coucou"
+
+pNombre "12 salut"
+-- => Just (12," salut")
+pNombre "3coucou"
+-- => Just (3,"coucou")
+pNombre "salut"
+-- => Nothing
+
+pCaractere 'c' "coucou"
+-- => Just ((),"oucou")
+pCaractere 'c' "salut"
+-- => Nothing
+
+pChaine "\"john\" coucou"
+-- => Just ("john", "coucou")
+pChaine "coucou \"john\""
+-- => Nothing
+pChaine "salut"
+-- => Nothing
+
+(>>>) pChiffre (pCaractere 'c') "4coucou"
+-- => Just ((), "oucou")
+(>>>) pNombre pChaine "2763\"coucou\""
+-- => Just ("coucou","")
+(>>>) pChiffre (pCaractere 'c') "salut"
+-- => Nothing
+(>>>) pChiffre (pCaractere 'c') "4salut"
+-- => Nothing
+(>>>) (pCaractere 'c') pChiffre "4coucou"
+-- => Nothing
+
+(<$$>) (+1) pNombre "123"
+-- => Just (124, "")
+(<$$>) (+1) pNombre "1coucou"
+-- => Just (2, "coucou")
+
+pTroisEntiers "1, 2, 3, salut"
+-- => Just ((1,2,3), ", salut")
+pTroisEntiers "1, 2, salut"
+-- => Nothing
+
+pListeTroisEntiers "1, 2, 3, coucou"
+-- => Just ([1,2,3], ", coucou")
+pListeTroisEntiers "1, 2, coucou"
+-- => Nothing
+
+cRepeter (pCaractere 'c') "ccccoucou"
+-- => Just ([(),(),(),()],"oucou")
+cRepeter pChiffre "1234coucou"
+-- => Just ([1,2,3,4],"coucou")
+
+pListeEntiers "1 2 3 4 coucou"
+-- => Just ([1,2,3,4]," coucou")
+pListeEntiers "coucou"
+-- => Just ([],"coucou")
+pListeEntiers "1, 2 coucou"
+-- => Just ([1],", 2 coucou")
