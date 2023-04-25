@@ -1,3 +1,5 @@
+print "--- Tests Parser ---"
+
 pChiffre "4coucou"
 -- => Just ('4',"coucou")
 pChiffre "45coucou"
@@ -66,3 +68,12 @@ pListeEntiers "coucou"
 -- => Just ([],"coucou")
 pListeEntiers "1, 2 coucou"
 -- => Just ([1],", 2 coucou")
+
+print "--- Tests JSONParser ---"
+
+pBooleen "   true2"
+-- => Just (True,"2")
+pBooleen "  falseCou4"
+-- => Just (False,"Cou4")
+pBooleen "  faltrue56"
+-- => Nothing
