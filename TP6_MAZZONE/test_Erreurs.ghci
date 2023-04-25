@@ -1,0 +1,40 @@
+distance "Venus"
+-- => Just 0.72
+distance "coucou"
+-- => Nothing
+
+suivante 1.01
+-- => Just "Mars"
+suivante 0.0
+-- => Just "Mercure"
+suivante 32
+-- => Nothing
+
+ua_vers_km 0.72
+-- => 1.07712e8
+
+distance_km_1 "Venus"
+-- => Just 1.07712e8
+distance_km_1 "coucou"
+-- => Nothing
+
+distance_km_2 "Venus"
+-- => Just 1.07712e8
+distance_km_2 "coucou"
+-- => Nothing
+
+distance_suivante_1 "Venus"
+-- => Just 1.0
+distance_suivante_1 "coucou"
+-- => Nothing
+distance_suivante_1 "Neptune"
+-- => Nothing
+
+-- fmap_Maybe n'est pas suffisant car il va nous sortir des Just (Just ...) qu'on ne pourra donc pas utiliser par la suite (car le unMaybe ne va pas gérer les excpetions de Nothing)
+
+distance_suivante_2 "Venus"
+-- => Just 1.0
+distance_suivante_2 "coucou"
+-- => Nothing
+distance_suivante_2 "Neptune"
+-- => Nothing
