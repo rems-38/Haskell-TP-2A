@@ -1,0 +1,5 @@
+Bonjour, comment allez-vous ?
+Bien et vous ?
+Oui très bien merci.
+
+Au revoir !

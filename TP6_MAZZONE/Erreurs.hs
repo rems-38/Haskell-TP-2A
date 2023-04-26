@@ -1,6 +1,8 @@
 planetes :: [(Double, String)]
 planetes = [(0.39, "Mercure"), (0.72, "Venus"), (1.00, "Terre"), (1.52, "Mars"), (5.20, "Jupiter"), (9.54, "Saturne"), (19.2, "Uranus"), (30.1, "Neptune")]
 
+-- Partie réalisée dans un permier temps avec un principe d'index (non adapté à priori)
+
 -- elemIndex :: (Eq a) => a -> [a] -> Maybe Int
 -- elemIndex n l = elemIndex_aux n l 0
 

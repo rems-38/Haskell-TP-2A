@@ -1,0 +1,7 @@
+afficher_avec_etoiles 3.14
+-- => "***3.14***"
+afficher_avec_etoiles "salut"
+-- => "***\"salut\"***"
+
+wc "wc_test.txt"
+-- => 5 15 79 wc_test.txt 
