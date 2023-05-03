@@ -1,0 +1,26 @@
+mouvements (plateau_vide, (0, 0))
+-- => [(1,2),(2,1)]
+mouvements (plateau_vide, (1, 0))
+-- => [(2,2),(0,2),(3,1)]
+mouvements ((visiter plateau_vide (0,2)), (1, 0))
+-- => [(2,2),(3,1)]
+
+etats_suivants (plateau_vide, (1, 0))
+-- => [(1024,(2,2)),(256,(0,2)),(128,(3,1))]
+etats_suivants ((visiter plateau_vide (0,2)), (1, 0))
+-- => [(1280,(2,2)),(384,(3,1))]
+
+explorer_etats (plateau_vide, (1, 0))
+-- => [(4095,(0,1)),(4095,(3,0)),(4095,(0,1)),(4095,(3,0)),(4095,(0,1)),(4095,(3,2))]
+explorer_etats ((visiter plateau_vide (0, 0)), (1, 2))
+-- => []
+
+etats_gagnants (1, 0)
+-- => [(4095,(0,1)),(4095,(3,0)),(4095,(0,1)),(4095,(3,0)),(4095,(0,1)),(4095,(3,2))]
+-- il y a des doublons dans la liste ce qui signifie que l'état gagnant est accessible via plusieurs "chemins"
+etats_gagnants (0, 0)
+-- => []
+-- on verra que ça se confirme par la suite
+
+positions_initiales_realisables
+-- => [(1,0),(1,1),(1,2),(2,0),(2,1),(2,2)]

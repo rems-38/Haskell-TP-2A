@@ -12,9 +12,9 @@ etats_suivants state = do
 
 explorer_etats :: Etat -> [Etat]
 explorer_etats state | plateau_plein (fst state) = [state]
-                     | otherwise = 
-                        let etats = etats_suivants state
-                        in state : concatMap explorer_etats etats
+                     | otherwise = do
+                       next_etat <- etats_suivants state
+                       explorer_etats next_etat
 
 etats_gagnants :: Position -> [Etat]
 etats_gagnants p = explorer_etats (plateau_vide, p)
