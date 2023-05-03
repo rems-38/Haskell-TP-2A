@@ -1,4 +1,6 @@
-print "--- Tests Parser ---"
+print "------------------------"
+print "----- Tests Parser -----"
+print "------------------------"
 
 pChiffre "4coucou"
 -- => Just ('4',"coucou")
@@ -61,6 +63,10 @@ cRepeter (pCaractere 'c') "ccccoucou"
 -- => Just ([(),(),(),()],"oucou")
 cRepeter pChiffre "1234coucou"
 -- => Just ([1,2,3,4],"coucou")
+cRepeter pNombre "1 2 3 x"
+-- => Just ([1,2,3]," x")
+cRepeter pNombre "x"
+-- => Just ([],"x")
 
 pListeEntiers "1 2 3 4 coucou"
 -- => Just ([1,2,3,4]," coucou")
@@ -69,7 +75,9 @@ pListeEntiers "coucou"
 pListeEntiers "1, 2 coucou"
 -- => Just ([1],", 2 coucou")
 
+print "------------------------"
 print "--- Tests JSONParser ---"
+print "------------------------"
 
 pBooleen "   true2"
 -- => Just (True,"2")
@@ -77,3 +85,6 @@ pBooleen "  falseCou4"
 -- => Just (False,"Cou4")
 pBooleen "  faltrue56"
 -- => Nothing
+
+cRepeterVirgules pNombre "1,2,3y"
+-- => Just ([1,2,3], "y")

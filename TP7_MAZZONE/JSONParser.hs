@@ -16,3 +16,10 @@ pBooleen str = case sauterEspaces str of
                 'f' : r -> if (pTabChar ['a', 'l', 's', 'e'] r) /= Nothing
                             then Just (False, getReste (pTabChar ['a', 'l', 's', 'e'] r))
                             else Nothing
+
+-- Combinateur "alternative"
+(<||>) :: (Eq a) => Parser a -> Parser a -> Parser a
+(<||>) p1 p2 str | p1 str /= Nothing = p1 str
+                 | otherwise = p2 str
+
+-- cRepeterVirgules :: Parser a -> Parser [a]
