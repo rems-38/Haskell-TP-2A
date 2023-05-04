@@ -88,3 +88,13 @@ pBooleen "  faltrue56"
 
 cRepeterVirgules pNombre "1,2,3y"
 -- => Just ([1,2,3], "y")
+
+pNombreJSON "4coucou"
+-- => Just (JSON_Int 4,"coucou")
+
+pBooleenJSON "  falseCou4"
+-- => Just (JSON_Bool False,"Cou4")
+
+pChaineJSON "\"john\" coucou"
+-- => Just (JSON_String "john", "coucou")
+
