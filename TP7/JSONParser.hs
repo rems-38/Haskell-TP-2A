@@ -1,5 +1,7 @@
+{-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# HLINT ignore "Use camelCase" #-}
 import Parser
-import Data.Maybe
+import Data.Maybe ( isJust )
 
 pTabChar :: [Char] -> Parser ()
 pTabChar [] str = Just ((), str)
@@ -23,6 +25,7 @@ pBooleen str = case sauterEspaces str of
 (<||>) p1 p2 str | isJust (p1 str) = p1 str
                  | otherwise = p2 str
 
+-- problèmes dans cette fonction apparemment
 cRepeterVirgules :: Eq a => Parser a -> Parser [a]
 cRepeterVirgules p = cRepeter (pCaractere ',' >>> p <||> p)
 
@@ -48,14 +51,22 @@ p1 <<< p2 = p2 >>> p1
 pTableauJSON :: Parser JSON
 pTableauJSON = JSON_Array <$$> (pCaractere '[' >>> cRepeterVirgules pJSON <<< pCaractere ']')
 
--- pAttributJSON :: Parser (String, JSON)
--- pAttributJSON = (,) <$$> pChaine <<< pCaractere ':' <*> pJSON
+-- Parseur d'un attribut JSON
+pAttributJSON :: Parser (String, JSON)
+pAttributJSON = do
+                    cle <- pChaine
+                    pCaractere ':'
+                    val <- pJSON
+                    case cle of
+                        Just (c, _) -> return (c, val)
+                        Nothing -> fail "Erreur de syntaxe : l'attribut doit être une chaîne de caractères"
 
--- pObjetJSON :: Parser JSON
--- pObjetJSON = JSON_Object <$$> (pCaractere '{' >>> cRepeterVirgules pAttributJSON <<< pCaractere '}')
+
+pObjetJSON :: Parser JSON
+pObjetJSON = JSON_Object <$$> (pCaractere '{' >>> cRepeterVirgules pAttributJSON <<< pCaractere '}')
 
 pJSON :: Parser JSON
-pJSON = pNombreJSON <||> pBooleenJSON <||> pChaineJSON <||> pTableauJSON -- <||> pObjetJSON
+pJSON = pNombreJSON <||> pBooleenJSON <||> pChaineJSON <||> pTableauJSON <||> pObjetJSON
 
 unMaybe :: Maybe a -> a
 unMaybe (Just a) = a
